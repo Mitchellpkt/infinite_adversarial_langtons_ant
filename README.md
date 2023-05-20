@@ -68,7 +68,7 @@ strictly limited to controlling initial conditions of the board.
 
 If the adversary provides a board or board generating procedure with finite support (only a finite number of tiles in
 the non-default state) then the [Cohen-Kong Theorem](https://lucasschuermann.com/writing/langtons-ant) ensures the ant’s
-eventual trajectory will be unbounded and the an will always win. So the real question is how the dynamics unfold when
+eventual trajectory will be unbounded and the ant will always win. So the real question is how the dynamics unfold when
 the adversary provides a board with infinite support.
 
 I don’t think I’ve defined the adversary’s goals very well, mostly because I don’t have a great intuition for the
