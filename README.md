@@ -1,4 +1,4 @@
-# Langton's ant in an infinite adversarial environment
+# Langton's ant in procedurally-generated infinite adversarial environments
 
 **Mitchell Krawiec-Thayer**  
 _Email:_ ant@mitchellpkt.com
@@ -13,6 +13,9 @@ is [defined as usual](https://web.archive.org/web/20230517163551/https://en.wiki
 
 In the variation described here, we introduce an adversarial aspect, by allowing specification of arbitrary initial
 board generation procedures, and goals to disrupt highway generation.
+
+We also use procedurally-generated infinite boards, to allow the ant to run for an arbitrary number of steps without
+running into edges.
 
 ## Infinite adversarial environments
 
@@ -29,10 +32,12 @@ Here are the key ideas for this variant, explained as an interactive game:
 ### As initial conditions
 
 Since the ant is entirely deterministic and the adversary doesn’t have any influence beyond the initial board, the
-“game” does not need to be interactive. _To ‘win’ as the adversary, one only needs to produce an initial board (or board
-generating procedure) that achieves certain characteristics, even with infinite iterations by the ant._
+“game” does not need to be interactive.
 
-### Example
+> To ‘win’ as the adversary, one only needs to produce an initial board (or board
+> generating procedure) that achieves certain characteristics, even with infinite iterations by the ant.
+
+## Example
 
 In this version of the codebase, the user can provide arbitrary functions for procedural generation of the initial
 board. For example, we can define
@@ -73,8 +78,10 @@ Off the cuff, maybe I’d conjecture that there cannot exist any initial configu
 loop of finite length for infinite iterations.
 
 > On any Nth iteration, the ant has only touched <= N tiles. Suppose we do a thought experiment where we create a second
-> board that is empty except for the initial states of the touched tiles up to the Nth step. This second board has finite
-> support, and so the usual theorems kick in, and consequently the ant will eventually start building a highway that would
+> board that is empty except for the initial states of the touched tiles up to the Nth step. This second board has
+> finite
+> support, and so the usual theorems kick in, and consequently the ant will eventually start building a highway that
+> would
 > carry it away from the initial loop.
 
 I guess this means the ant can (and will) always progressively expand its territory. It can build highways within its
@@ -83,3 +90,16 @@ unbounded highways away from established turf (e.g. concentric circles).
 
 I have no idea if this has any real world implications. If it does, please let me know.
 
+## Another example
+
+Here are the initial and final configurations for a much longer run on a board with diagonal stripes:
+
+```python
+def diagonals_large(position: Tuple[int, int]) -> Color:
+    x, y = position
+    return Color.BLACK if (x + y) % 100 == 0 else Color.WHITE
+```
+
+# ![diagonals](images/diagonals_in_1.png)
+
+# ![diagonals](images/diagonals_out_1.png)
