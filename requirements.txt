@@ -1,0 +1,5 @@
+numpy
+matplotlib
+jupyter
+pydantic
+tqdm
